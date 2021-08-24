@@ -1,5 +1,6 @@
 package com.navi.springmongo.services;
 
+import com.navi.springmongo.dto.UserDTO;
 import com.navi.springmongo.entities.User;
 import com.navi.springmongo.repositories.UserRepository;
 import com.navi.springmongo.services.exceptions.ObjectNotFoundException;
@@ -22,6 +23,14 @@ public class UserService {
     public User findById(String id){
         Optional<User> obj = userRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+
+    public User insert(User obj){
+        return userRepository.insert(obj);
+    }
+
+    public User fromDto(UserDTO objDto){
+        return new User(objDto.getId(), objDto.getNome(), objDto.getEmail());
     }
 
 }
