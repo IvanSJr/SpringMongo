@@ -2,10 +2,12 @@ package com.navi.springmongo.services;
 
 import com.navi.springmongo.entities.User;
 import com.navi.springmongo.repositories.UserRepository;
+import com.navi.springmongo.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -15,6 +17,11 @@ public class UserService {
 
     public List<User> findAll(){
         return userRepository.findAll();
+    }
+
+    public User findById(String id){
+        Optional<User> obj = userRepository.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
 
 }
