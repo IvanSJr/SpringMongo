@@ -38,4 +38,16 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public User update(User obj){
+        findById(obj.getId());
+        User newObj = findById(obj.getId());
+        updateUser(newObj, obj);
+        return userRepository.save(newObj);
+    }
+
+    private void updateUser(User newObj, User obj) {
+        newObj.setNome(obj.getNome());
+        newObj.setEmail(obj.getEmail());
+    }
+
 }
