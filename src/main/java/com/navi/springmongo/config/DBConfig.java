@@ -1,6 +1,7 @@
 package com.navi.springmongo.config;
 
 
+import com.navi.springmongo.dto.AuthorDTO;
 import com.navi.springmongo.entities.Post;
 import com.navi.springmongo.entities.User;
 import com.navi.springmongo.repositories.PostRepository;
@@ -37,11 +38,12 @@ public class DBConfig implements CommandLineRunner {
         User ivan = new User(null, "Ivan Santos", "ivan.junior2706@gmail.com");
         User carmen = new User(null, "Carmen Gomes", "carmengomes01@gmail.com");
 
-        Post post1 = new Post(null, sdf.parse("21/10/2020"), "Partiu viagem", "Vou viajar para São Paulo", bob);
-        Post post2 = new Post(null, sdf.parse("22/10/2020"), "Aprimorando minha habilidades programáticas", "Hoje eu comecei a estudar Java para me tornar um excelente programador!", ivan);
-        Post post3 = new Post(null, sdf.parse("23/08/2021"), "Meu novo emprego", "Hoje eu comecei a trabalhar na empresa Publicações Online como desenvolver FullStack!", ivan);
-
         userRepository.saveAll(Arrays.asList(maria, alex, bob, ivan, carmen));
+
+        Post post1 = new Post(null, sdf.parse("21/10/2020"), "Partiu viagem", "Vou viajar para São Paulo", new AuthorDTO(bob));
+        Post post2 = new Post(null, sdf.parse("22/10/2020"), "Aprimorando minha habilidades programáticas", "Hoje eu comecei a estudar Java para me tornar um excelente programador!", new AuthorDTO(ivan));
+        Post post3 = new Post(null, sdf.parse("23/08/2021"), "Meu novo emprego", "Hoje eu comecei a trabalhar na empresa Publicações Online como desenvolver FullStack!", new AuthorDTO(ivan));
+
         postRepository.saveAll(Arrays.asList(post1, post2, post3));
 
     }
