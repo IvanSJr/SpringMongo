@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.List;
 import java.util.TimeZone;
 
 @Configuration
@@ -45,6 +46,10 @@ public class DBConfig implements CommandLineRunner {
         Post post3 = new Post(null, sdf.parse("23/08/2021"), "Meu novo emprego", "Hoje eu comecei a trabalhar na empresa Publicações Online como desenvolver FullStack!", new AuthorDTO(ivan));
 
         postRepository.saveAll(Arrays.asList(post1, post2, post3));
+
+        bob.getPosts().addAll(List.of(post1));
+        ivan.getPosts().addAll(Arrays.asList(post2, post3));
+        userRepository.saveAll(Arrays.asList(bob, ivan));
 
     }
 }
